@@ -5,7 +5,9 @@ let board;
 let context;
 const resetButton = document.querySelector(".reset-button")
 const scoreDisplay = document.querySelector("#score");
+const sessionHighScoreDisplay = document.querySelector("#session-high-score")
 let score = 0;
+let sessionHighScore = 0;
 
 // Snake head
 
@@ -51,6 +53,10 @@ window.onload = () => initializeGame()
 
 const update = () => {
     if (gameOver) {
+        if (sessionHighScore < score) {
+            sessionHighScore = score;
+            sessionHighScoreDisplay.textContent = sessionHighScore;
+        }
         return
     }
 
@@ -100,8 +106,6 @@ const update = () => {
         }
     }
 }
-
-
 
 const placeFood = () => {
     foodX = Math.floor(Math.random() * columns) * blockSize;
