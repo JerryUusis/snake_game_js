@@ -4,6 +4,8 @@ const columns = 20;
 let board;
 let context;
 const resetButton = document.querySelector(".reset-button")
+const scoreDisplay = document.querySelector("#score");
+let score = 0;
 
 // Snake head
 
@@ -12,15 +14,16 @@ let snakeY = blockSize * 5;
 let velocityX = 0;
 let velocityY = 0;
 
-const snakeBody = [];
+let snakeBody = [];
 
 // Food
 let foodX;
 let foodY;
 
+let gameInterval;
 let gameOver = false;
 
-window.onload = () => {
+const initializeGame = () => {
     board = document.querySelector('#board');
     board.height = rows * blockSize;
     board.width = columns * blockSize;
@@ -28,22 +31,23 @@ window.onload = () => {
 
     placeFood();
     document.addEventListener('keyup', changeDirection)
-    setInterval(update, 1000 / 10)
+    gameInterval = setInterval(update, 1000 / 10)
 }
 
+const resetGame = () => {
+    clearInterval(gameInterval);
+    gameOver = false;
+    velocityX = 0;
+    velocityY = 0;
+    score = 0;
+    scoreDisplay.textContent = score;
+    snakeX = blockSize * 5;
+    snakeY = blockSize * 5;
+    snakeBody = [];
+    initializeGame();
+}
 
-// const initializeGame = () => {
-//     board = document.querySelector('#board');
-//     board.height = rows * blockSize;
-//     board.width = columns * blockSize;
-//     context = board.getContext('2d');
-    
-//     placeFood();
-//     document.addEventListener('keyup', changeDirection)
-//     setInterval(update, 1000 / 10)
-// }
-
-// window.onload = () => initializeGame()
+window.onload = () => initializeGame()
 
 const update = () => {
     if (gameOver) {
@@ -57,9 +61,12 @@ const update = () => {
     context.fillStyle = 'pink';
     context.fillRect(foodX, foodY, blockSize, blockSize)
 
+    // Feeding event
     if (snakeX === foodX && snakeY === foodY) {
         snakeBody.push([foodX, foodY])
         placeFood();
+        score += 1
+        scoreDisplay.textContent = score;
     }
 
     for (let i = snakeBody.length - 1; i > 0; i--) {
@@ -92,7 +99,6 @@ const update = () => {
             alert("Game Over: Snake bit itself")
         }
     }
-
 }
 
 
@@ -121,4 +127,4 @@ const changeDirection = (event) => {
     }
 }
 
-// resetButton.addEventListener('click', initializeGame)
+resetButton.addEventListener('click', resetGame)
