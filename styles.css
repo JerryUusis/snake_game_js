@@ -4,9 +4,12 @@
     margin: 0;
 }
 
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
     height: 100vh;
     width: 100vw;
+    color: beige;
 }
 
 .main-container {
@@ -15,5 +18,30 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
+    background-color: #ad2e2e;
 }
 
+h1 {
+    font-size: 3rem;
+    font-family: "Press Start 2p";
+    letter-spacing: 10px;
+}
+
+.score-display {
+    font-size: 1.5rem;
+    padding: 1rem;
+    font-family: monospace;
+}
+
+#board {
+    border: 5px solid black;
+}
+
+.reset-button {
+    font-family: monospace;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    color: beige;
+    background-color:#069906;
+    border: 1px;
+}

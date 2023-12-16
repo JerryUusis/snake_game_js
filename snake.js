@@ -64,7 +64,7 @@ const update = () => {
     context.fillRect(0, 0, board.width, board.height);
 
     //Food
-    context.fillStyle = 'pink';
+    context.fillStyle = '#ad2e2e';
     context.fillRect(foodX, foodY, blockSize, blockSize)
 
     // Feeding event
@@ -83,7 +83,7 @@ const update = () => {
     }
 
     //Snake body
-    context.fillStyle = 'lime';
+    context.fillStyle = '#069906';
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
